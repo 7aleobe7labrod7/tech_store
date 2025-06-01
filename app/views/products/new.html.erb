@@ -1,2 +1,13 @@
+<% if @product.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>Errores:</h4>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <h1><%= action_name == "new" ? "Nuevo Producto" : "Editar Producto" %></h1>
 <%= render 'form', product: @product %>

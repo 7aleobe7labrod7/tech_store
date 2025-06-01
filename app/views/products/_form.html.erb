@@ -1,0 +1,24 @@
+<%= form_with(model: product, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.number_field :price, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :stock, class: "form-label" %>
+    <%= form.number_field :stock, class: "form-control" %>
+  </div>
+
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to 'Cancelar', products_path, class: "btn btn-secondary ms-2" %>
+<% end %>

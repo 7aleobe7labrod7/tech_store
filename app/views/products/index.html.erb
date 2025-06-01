@@ -1,0 +1,56 @@
+<h1 class="mb-4">Catálogo de Productos</h1>
+
+<div class="mb-3">
+  <%= link_to 'Nuevo Producto', new_product_path, class: "btn btn-primary" %>
+</div>
+
+<table class="table table-hover table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= truncate(product.description, length: 50) %></td>
+        <td><%= number_to_currency(product.price, unit: "$", separator: ",", delimiter: ".") %></td>
+        <td><%= product.stock %></td>
+        <td>
+          <%= link_to 'Ver', product, class: "btn btn-outline-secondary btn-sm" %>
+          <%= link_to 'Editar', edit_product_path(product), class: "btn btn-outline-primary btn-sm" %>
+          <%= link_to 'Eliminar', product, method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-outline-danger btn-sm" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="container">
+  <h1 class="mb-4">Listado de Productos</h1>
+
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+            <p class="card-text"><strong>Precio:</strong> $<%= number_to_currency(product.price, unit: "") %></p>
+            <p class="card-text"><strong>Stock:</strong> <%= product.stock %></p>
+            <%= link_to 'Ver más', product_path(product), class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to 'Agregar nuevo producto', new_product_path, class: "btn btn-success mt-3" %>
+</div>
+

@@ -19,25 +19,47 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Tech Store</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container-fluid">
+    <%= link_to 'Tech Store', root_path, class: "navbar-brand" %>
 
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to 'Productos', products_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Agregar producto', new_product_path, class: "nav-link" %>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><%= link_to 'Productos', products_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Servicios', services_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Tutoriales', tutorials_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Prompts', prompts_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Posts', posts_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Citas', appointments_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Compras', purchases_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to 'Pedidos', orders_path, class: "nav-link" %></li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <span class="navbar-text me-2">Hola, <%= current_user.email %></span>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Cerrar sesión', destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Iniciar sesión', new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Registrarse', new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
     
     <div class="container">
       <% flash.each do |key, message| %>
